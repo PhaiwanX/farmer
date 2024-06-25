@@ -16,7 +16,7 @@ const products = [
 export default function Sales() {
     return (
         <MainLayout>
-            <div className="container mx-auto py-8">
+            <div className="container mx-auto py-8 px-2">
                 <h1 className="text-3xl font-bold mb-4">สินค้า</h1>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8">

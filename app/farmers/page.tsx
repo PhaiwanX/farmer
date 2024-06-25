@@ -8,7 +8,7 @@ const farmers = [
 
 export default function Farmers() {
     return (
-        <div className="container mx-auto py-8">
+        <div className="container mx-auto py-8 px-2">
             <h1 className="text-3xl font-bold mb-4">ข้อมูลเกษตรกร</h1>
             <ul>
                 {farmers.map(farmer => (

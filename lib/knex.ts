@@ -7,8 +7,7 @@ const knexConfig = {
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'farmer',
-    charset: 'utf8' // Specify charset here
-
+    charset: 'utf8'
   },
 };
 
