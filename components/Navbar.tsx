@@ -1,13 +1,13 @@
-import { HomeIcon, UsersIcon, ChatAlt2Icon, ShoppingBagIcon, PhoneIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { HomeIcon, PhotoIcon, ChatBubbleBottomCenterIcon, ShoppingBagIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link'
 export default function Navbar() {
     const nav = {
         name: "หมู่บ้านวิทยาศาสตร์",
         items: [
             { href: '/', label: 'หน้าหลัก', icon: HomeIcon },
-            { href: '/recommendations', label: 'คำแนะนำการปลูกพืช', icon: ChatAlt2Icon },
+            { href: '/gallery', label: 'แกลลอรี่', icon: PhotoIcon },
+            { href: '/recommendations', label: 'คำแนะนำการปลูกพืช', icon: ChatBubbleBottomCenterIcon },
             { href: '/sales', label: 'ช่องทางการจำหน่ายสินค้า', icon: ShoppingBagIcon },
-            { href: '/contact', label: 'ติดต่อเรา', icon: PhoneIcon },
         ]
     };
 
@@ -18,8 +18,8 @@ export default function Navbar() {
                     <a className="flex-none text-xl font-semibold" href="#">{nav.name}</a>
                     <div className="sm:hidden">
                         <button type="button" className="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-collapse="#navbar-with-collapse" aria-controls="navbar-with-collapse" aria-label="Toggle navigation">
-                            <MenuIcon className="hs-collapse-open:hidden flex-shrink-0 size-4" />
-                            <XIcon className="hs-collapse-open:block hidden flex-shrink-0 size-4" />
+                            <Bars3Icon className="hs-collapse-open:hidden flex-shrink-0 size-4" />
+                            <XMarkIcon className="hs-collapse-open:block hidden flex-shrink-0 size-4" />
                         </button>
                     </div>
                 </div>

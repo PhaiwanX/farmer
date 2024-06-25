@@ -21,7 +21,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${mitr.className} bg-gray-50`}>
-        <Navbar />
         {children}
       </body>
       <PrelineScript />
