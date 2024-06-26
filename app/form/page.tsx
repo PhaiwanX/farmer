@@ -430,7 +430,7 @@ const Home = () => {
             <div className="relative w-full my-2">
               <input
                 type="text"
-                id="area"
+                id="location_amount"
                 className="peer border p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
               focus:pt-6
               focus:pb-2
@@ -443,7 +443,7 @@ const Home = () => {
                 onChange={handleLocationInputChange}
               />
               <label
-                htmlFor="area"
+                htmlFor="location_amount"
                 className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent  origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none
               peer-focus:scale-90
               peer-focus:translate-x-0.5

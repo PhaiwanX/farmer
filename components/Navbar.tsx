@@ -1,6 +1,11 @@
-import { HomeIcon, PhotoIcon, ChatBubbleBottomCenterIcon, ShoppingBagIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import Link from 'next/link'
+"use client"
+import { useState } from 'react';
+import { HomeIcon, PhotoIcon, ChatBubbleBottomCenterIcon, ShoppingBagIcon, Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+
 export default function Navbar() {
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+
     const nav = {
         name: "หมู่บ้านวิทยาศาสตร์",
         items: [
@@ -8,7 +13,17 @@ export default function Navbar() {
             { href: '/gallery', label: 'แกลลอรี่', icon: PhotoIcon },
             { href: '/recommendations', label: 'คำแนะนำการปลูกพืช', icon: ChatBubbleBottomCenterIcon },
             { href: '/sales', label: 'ช่องทางการจำหน่ายสินค้า', icon: ShoppingBagIcon },
-        ]
+            { href: '/search', label: 'ค้นหา', icon: MagnifyingGlassIcon },
+        ],
+        dropdown: {
+            label: 'เกี่ยวกับดินเค็ม',
+            items: [
+                { href: '/', label: 'สภาพทั่วไปของดินเค็ม' },
+                { href: '/', label: 'การสำรวจ การเก็บตัวอย่างดิน การวิเคราะห์ดิน' },
+                { href: '/', label: 'การจัดการเชิงพื้นที่ดินเค็ม' },
+                { href: '/', label: 'วัสดุปรับปรุงและฟื้นฟูดินเค็ม' },
+            ]
+        }
     };
 
     return (
@@ -25,12 +40,28 @@ export default function Navbar() {
                 </div>
                 <div id="navbar-with-collapse" className="hidden transition-all duration-[0.1ms] overflow-hidden basis-full grow sm:block">
                     <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
+
+
                         {nav.items.map((item) => (
                             <Link key={item.label} className="flex items-center font-medium text-gray-600 hover:text-gray-400" href={item.href}>
                                 <item.icon className="h-5 w-5 mr-2" aria-hidden="true" />
                                 {item.label}
                             </Link>
                         ))}
+                        <div className="relative">
+                            <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center font-medium text-gray-600 hover:text-gray-400">
+                                {nav.dropdown.label}
+                            </button>
+                            {dropdownOpen && (
+                                <div className="relative md:fixed mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-lg z-10">
+                                    {nav.dropdown.items.map((dropdownItem) => (
+                                        <Link key={dropdownItem.label} className="block px-4 py-2 text-gray-600 hover:bg-gray-100" href={dropdownItem.href}>
+                                            {dropdownItem.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </nav>

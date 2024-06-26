@@ -31,7 +31,7 @@ export default function Sales() {
                                 <hr />
                                 <p className="text-base text-center mt-3 text-gray-600 mb-2">ติดต่อ: {product.contact}</p>
                             </div>
-                        </div>
+                        </div>  
                     ))}
                 </div>
             </div>
