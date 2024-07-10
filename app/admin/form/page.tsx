@@ -1,10 +1,10 @@
 "use client";
 import { UserGroupIcon, InformationCircleIcon, MapPinIcon, ArrowLeftIcon, ArrowRightIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 import { SetStateAction, useState } from 'react';
-import RootLayout from '../layout';
-import MainLayout from '../main.layout';
+import RootLayout from '../../layout';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import AdminLayout from '../layouts';
 
 const Home = () => {
   const [step, setStep] = useState(1);
@@ -496,7 +496,7 @@ const Home = () => {
   };
 
   return (
-    <MainLayout>
+    <AdminLayout>
       <div className="px-2 md:px-10 lg:px-96">
         <div className="flex flex-col justify-center items-center bg-white border border-gray-200 shadow-sm rounded-xl p-4 md:p-5 my-5">
           <ul className="flex flex-row justify-between gap-x-2 w-full">
@@ -544,7 +544,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </MainLayout>
+    </AdminLayout>
   );
 };
 
