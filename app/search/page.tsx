@@ -1,10 +1,10 @@
 "use client";
-import { useState, useEffect, SetStateAction } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MainLayout from "../main.layout";
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-
+import * as utm from 'utm'; 
 export default function Search() {
     const [farmers, setFarmers] = useState([]);
     const [query, setQuery] = useState('');
@@ -13,7 +13,10 @@ export default function Search() {
         googleMapsApiKey: "AIzaSyAiMUHa_2W5yKRSjon5PaaWvl5obLH03pY", // Add your Google Maps API key here
     });
 
-    const center = { lat: 13.7563, lng: 100.5018 }; // Default center (Bangkok coordinates)
+    function convertUtmToLatLon(easting: number, northing: number) {
+        const { latitude, longitude } = utm.toLatLon(easting, northing, 47, "W");
+        return { lat: latitude, lng: longitude };
+    }
 
     useEffect(() => {
         const fetchFarmers = async () => {
@@ -28,7 +31,7 @@ export default function Search() {
         fetchFarmers();
     }, [query]);
 
-    const handleInputChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+    const handleInputChange = (event: any) => {
         setQuery(event.target.value);
     };
 
@@ -55,12 +58,13 @@ export default function Search() {
                                 <div className="px-6 py-3">
                                     {isLoaded && (
                                         <GoogleMap
-                                            zoom={12}
-                                            center={{ lat: parseFloat(farmer.location_y), lng: parseFloat(farmer.location_x) }}
+                                            zoom={15}
+                                            mapTypeId="satellite"
+                                            center={convertUtmToLatLon(parseFloat(farmer.location_x), parseFloat(farmer.location_y))}
                                             mapContainerClassName="map"
                                             mapContainerStyle={{ width: "100%", height: "300px", margin: "auto" }}
                                         >
-                                            <Marker position={{ lat: parseFloat(farmer.location_y), lng: parseFloat(farmer.location_x) }} />
+                                            <Marker position={convertUtmToLatLon(parseFloat(farmer.location_x), parseFloat(farmer.location_y))} />
                                         </GoogleMap>
                                     )}
 

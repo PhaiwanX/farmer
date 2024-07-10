@@ -48,12 +48,12 @@ export default function Sidebar({
                 </div>
             </header> */}
             <div className="flex h-screen">
-                <div className={`bg-gray-800 text-white w-64 space-y-6 py-7 px-2 ${isSidebarOpen ? 'block' : 'hidden'}`}>
+                <div className={`bg-gray-800 text-white w-16 md:w-64 space-y-6 py-7 px-2 ${isSidebarOpen ? 'block' : 'hidden'}`}>
                     <nav>
                         {nav.items.map((item, index) => (
                             <Link href={item.href} key={index} className=" py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white flex items-center gap-x-2">
                                 <item.icon className="h-5 w-5" />
-                                <span>{item.label}</span>
+                                <span className='hidden md:block' >{item.label}</span>
                             </Link>
                         ))}
                     </nav>

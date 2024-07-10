@@ -1,30 +1,31 @@
 "use client"
 import { useState } from 'react';
-import { HomeIcon, PhotoIcon, ChatBubbleBottomCenterIcon, ShoppingBagIcon, Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, PhotoIcon, ChatBubbleBottomCenterIcon, ShoppingBagIcon, Bars3Icon, XMarkIcon, QuestionMarkCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-
 export default function Navbar() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const nav = {
         name: "หมู่บ้านวิทยาศาสตร์",
         items: [
-            { href: '/', label: 'หน้าหลัก', icon: HomeIcon },
-            { href: '/gallery', label: 'แกลลอรี่', icon: PhotoIcon },
             { href: '/recommendations', label: 'คำแนะนำการปลูกพืช', icon: ChatBubbleBottomCenterIcon },
             { href: '/sales', label: 'ช่องทางการจำหน่ายสินค้า', icon: ShoppingBagIcon },
-            { href: '/search', label: 'ค้นหา', icon: MagnifyingGlassIcon },
+            { href: '/gallery', label: 'ภาพกิจกรรม', icon: PhotoIcon },
+            { href: '/search', label: 'ติดต่อเรา', icon: QuestionMarkCircleIcon },
         ],
         dropdown: {
-            label: 'เกี่ยวกับดินเค็ม',
+            label: 'หน้าแรก',
+            icon: HomeIcon,
             items: [
+                { href: '/', label: 'ไปหน้าหลัก' },
                 { href: '/', label: 'สภาพทั่วไปของดินเค็ม' },
-                { href: '/', label: 'การสำรวจ การเก็บตัวอย่างดิน การวิเคราะห์ดิน' },
-                { href: '/', label: 'การจัดการเชิงพื้นที่ดินเค็ม' },
-                { href: '/', label: 'วัสดุปรับปรุงและฟื้นฟูดินเค็ม' },
+                { href: '/analyze', label: 'การสำรวจ การเก็บตัวอย่างดิน การวิเคราะห์ดิน' },
+                { href: '/manage', label: 'การจัดการเชิงพื้นที่ดินเค็ม' },
+                { href: '/tools', label: 'วัสดุปรับปรุงและฟื้นฟูดินเค็ม' },
             ]
         }
     };
+
 
     return (
         <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white shadow-sm text-sm py-4">
@@ -41,15 +42,9 @@ export default function Navbar() {
                 <div id="navbar-with-collapse" className="hidden transition-all duration-[0.1ms] overflow-hidden basis-full grow sm:block">
                     <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
 
-
-                        {nav.items.map((item) => (
-                            <Link key={item.label} className="flex items-center font-medium text-gray-600 hover:text-gray-400" href={item.href}>
-                                <item.icon className="h-5 w-5 mr-2" aria-hidden="true" />
-                                {item.label}
-                            </Link>
-                        ))}
                         <div className="relative">
                             <button onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center font-medium text-gray-600 hover:text-gray-400">
+                                <nav.dropdown.icon className="h-5 w-5 mr-2" aria-hidden="true" />   
                                 {nav.dropdown.label}
                             </button>
                             {dropdownOpen && (
@@ -62,6 +57,13 @@ export default function Navbar() {
                                 </div>
                             )}
                         </div>
+
+                        {nav.items.map((item) => (
+                            <Link key={item.label} className="flex items-center font-medium text-gray-600 hover:text-gray-400" href={item.href}>
+                                <item.icon className="h-5 w-5 mr-2" aria-hidden="true" />
+                                {item.label}
+                            </Link>
+                        ))}
                     </div>
                 </div>
             </nav>

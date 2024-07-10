@@ -32,7 +32,8 @@ export async function POST(request: Request) {
         location_x,
         location_y,
         location_amount,
-        group
+        group,
+        plant
     } = await request.json();
     try {
         const [fid] = await knex('farmer').insert({
@@ -46,7 +47,8 @@ export async function POST(request: Request) {
             location_x,
             location_y,
             location_amount,
-            group
+            group,
+            plant
         }).returning('fid');
         return Response.json({ status: "success", message: "Data added" });
     } catch (error) {

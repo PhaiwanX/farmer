@@ -31,13 +31,13 @@ export async function POST(req: Request) {
 
 export async function PUT(req: Request) {
     try {
-        const { uid, name, group, role } = await req.json();
+        const { uid, name, group, role, password } = await req.json();
 
-        if (!uid || !name || !group || !role) {
-            return Response.json({ error: 'Missing required fields: uid, name, group, role' }, { status: 400 });
+        if (!uid || !name || !group || !role || !password) {
+            return Response.json({ error: 'Missing required fields: uid, name, group, role, password' }, { status: 400 });
         }
 
-        await knex('user').where({ uid }).update({ name, group, role });
+        await knex('user').where({ uid }).update({ name, group, role, password });
         return Response.json({ message: 'User updated' }, { status: 200 });
     } catch (error) {
         return Response.json({ error: 'Failed to update user' }, { status: 500 });

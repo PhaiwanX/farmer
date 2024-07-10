@@ -4,6 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { CheckCircleIcon, ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import AdminLayout from '../layouts';
+import Link from 'next/link';
 
 const FarmersPage = () => {
     const [farmers, setFarmers] = useState<any[]>([]);
@@ -76,7 +77,14 @@ const FarmersPage = () => {
         <AdminLayout>
             <div className="container mx-auto py-8">
                 <h1 className="text-3xl font-bold mb-4">Farmers Management</h1>
-
+                <div className="mb-4">
+                    <Link
+                        href={'/form'}
+                        className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    >
+                        Add Data
+                    </Link>
+                </div>
                 {/* Farmer Table */}
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
@@ -86,6 +94,19 @@ const FarmersPage = () => {
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Phone Number
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                ID Card
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Address
+                            </th>
+
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Area
+                            </th>
+                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Plant
                             </th>
                             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Location
@@ -106,7 +127,13 @@ const FarmersPage = () => {
                             <tr key={farmer.fid}>
                                 <td className="px-6 py-4 whitespace-nowrap">{farmer.fullname}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{farmer.phone_number}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{farmer.location}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{farmer.id_card}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                    {farmer.address_group} หมู่ {farmer.address_no} ตำบล{farmer.address_subdistrict} อำเภอ{farmer.address_subdistrict}
+                                </td>
+                                <td className='px-6 py-4 whitespace-nowarp'>{farmer.location_amount} ไร่ </td>
+                                <td className='px-6 py-4 whitespace-nowarp'>{farmer.plant}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">X : {farmer.location_x} Y : {farmer.location_y}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{farmer.group}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <button
@@ -163,7 +190,15 @@ const FarmersPage = () => {
                                         fid: selectedFarmer.fid,
                                         fullname: formData.get('fullname') as string,
                                         phone_number: formData.get('phone_number') as string,
-                                        location: formData.get('location') as string,
+                                        id_card: formData.get('id_card') as string,
+                                        address_group: formData.get('address_group') as string,
+                                        address_no: formData.get('address_no') as string,
+                                        address_subdistrict: formData.get('address_subdistrict') as string,
+                                        address_district: formData.get('address_district') as string,
+                                        location_amount: formData.get('location_amount') as string,
+                                        plant: formData.get('plant') as string,
+                                        location_x: formData.get('location_x') as string,
+                                        location_y: formData.get('location_y') as string,
                                         group: formData.get('group') as string,
                                     };
                                     handleSave(updatedData);
@@ -200,16 +235,128 @@ const FarmersPage = () => {
                                         />
                                     </div>
 
-                                    {/* Location */}
+                                    {/* ID Card */}
                                     <div className="col-span-2">
-                                        <label htmlFor="location" className="block text-sm font-medium text-gray-700">
-                                            Location
+                                        <label htmlFor="id_card" className="block text-sm font-medium text-gray-700">
+                                            ID Card
                                         </label>
                                         <input
                                             type="text"
-                                            id="location"
-                                            name="location"
-                                            defaultValue={selectedFarmer?.location}
+                                            id="id_card"
+                                            name="id_card"
+                                            defaultValue={selectedFarmer?.id_card}
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                            required
+                                        />
+                                    </div>
+
+                                    {/* Address */}
+                                    <div className="col-span-1">
+                                        <label htmlFor="address_group" className="block text-sm font-medium text-gray-700">
+                                            Address Group
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="address_group"
+                                            name="address_group"
+                                            defaultValue={selectedFarmer?.address_group}
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col-span-1">
+                                        <label htmlFor="address_no" className="block text-sm font-medium text-gray-700">
+                                            Address No
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="address_no"
+                                            name="address_no"
+                                            defaultValue={selectedFarmer?.address_no}
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col-span-1">
+                                        <label htmlFor="address_subdistrict" className="block text-sm font-medium text-gray-700">
+                                            Subdistrict
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="address_subdistrict"
+                                            name="address_subdistrict"
+                                            defaultValue={selectedFarmer?.address_subdistrict}
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col-span-1">
+                                        <label htmlFor="address_district" className="block text-sm font-medium text-gray-700">
+                                            District
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="address_district"
+                                            name="address_district"
+                                            defaultValue={selectedFarmer?.address_district}
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                            required
+                                        />
+                                    </div>
+
+                                    {/* Area */}
+                                    <div className="col-span-2">
+                                        <label htmlFor="location_amount" className="block text-sm font-medium text-gray-700">
+                                            Area (ไร่)
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="location_amount"
+                                            name="location_amount"
+                                            defaultValue={selectedFarmer?.location_amount}
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                            required
+                                        />
+                                    </div>
+
+                                    {/* Plant */}
+                                    <div className="col-span-2">
+                                        <label htmlFor="plant" className="block text-sm font-medium text-gray-700">
+                                            Plant
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="plant"
+                                            name="plant"
+                                            defaultValue={selectedFarmer?.plant}
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                            required
+                                        />
+                                    </div>
+
+                                    {/* Location */}
+                                    <div className="col-span-1">
+                                        <label htmlFor="location_x" className="block text-sm font-medium text-gray-700">
+                                            Location X
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="location_x"
+                                            name="location_x"
+                                            defaultValue={selectedFarmer?.location_x}
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                            required
+                                        />
+                                    </div>
+                                    <div className="col-span-1">
+                                        <label htmlFor="location_y" className="block text-sm font-medium text-gray-700">
+                                            Location Y
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="location_y"
+                                            name="location_y"
+                                            defaultValue={selectedFarmer?.location_y}
                                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                             required
                                         />
